@@ -1,7 +1,7 @@
 name: merge-from-master
 on:
   schedule:
-    - cron: '1 0-15/3 * * *'
+    - cron: '10 0-15/3 * * *'
   watch:
     types: started
 jobs:
