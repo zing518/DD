@@ -13,17 +13,17 @@
 ============Quantumultx===============
 [task_local]
 #集鞭炮赢京豆
-10 8,21 * * * https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_firecrackers.js, tag=集鞭炮赢京豆, img-url=https://raw.githubusercontent.com/Orz-3/task/master/jd.png, enabled=true
+10 8,21 * * * https://gitee.com/lxk0301/jd_scripts/raw/master/jd_firecrackers.js, tag=集鞭炮赢京豆, img-url=https://raw.githubusercontent.com/Orz-3/task/master/jd.png, enabled=true
 
 ================Loon==============
 [Script]
-cron "10 8,21 * * *" script-path=https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_firecrackers.js,tag=集鞭炮赢京豆
+cron "10 8,21 * * *" script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_firecrackers.js,tag=集鞭炮赢京豆
 
 ===============Surge=================
-集鞭炮赢京豆 = type=cron,cronexp="10 8,21 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_firecrackers.js
+集鞭炮赢京豆 = type=cron,cronexp="10 8,21 * * *",wake-system=1,timeout=3600,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_firecrackers.js
 
 ============小火箭=========
-集鞭炮赢京豆 = type=cron,script-path=https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_firecrackers.js, cronexpr="10 8,21 * * *", timeout=3600, enable=true
+集鞭炮赢京豆 = type=cron,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_firecrackers.js, cronexpr="10 8,21 * * *", timeout=3600, enable=true
  */
 const $ = new Env('集鞭炮赢京豆');
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -69,8 +69,6 @@ if ($.isNode()) {
         $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/bean/signIndex.action`, {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
         if ($.isNode()) {
           await notify.sendNotify(`${$.name}cookie已失效 - ${$.UserName}`, `京东账号${$.index} ${$.UserName}\n请重新登录获取cookie`);
-        } else {
-          $.setdata('', `CookieJD${i ? i + 1 : ""}`);//cookie失效，故清空cookie。$.setdata('', `CookieJD${i ? i + 1 : "" }`);//cookie失效，故清空cookie。
         }
         continue
       }

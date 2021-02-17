@@ -1,30 +1,30 @@
 /*
 京东手机年终奖
 活动时间：2021年1月26日～2021年2月8日
-更新地址：https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_festival.js
+更新地址：https://gitee.com/lxk0301/jd_scripts/raw/master/jd_festival.js
 活动入口：https://shopping-festival.m.jd.com
 已支持IOS双京东账号, Node.js支持N个京东账号
 脚本兼容: QuantumultX, Surge, Loon, 小火箭，JSBox, Node.js
 ============Quantumultx===============
 [task_local]
 #京东手机年终奖
-15 0 * * * https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_festival.js, tag=京东手机年终奖, img-url=https://raw.githubusercontent.com/yogayyy/Scripts/master/Icon/shylocks/jd_festival2.jpg, enabled=true
+15 0 * * * https://gitee.com/lxk0301/jd_scripts/raw/master/jd_festival.js, tag=京东手机年终奖, img-url=https://raw.githubusercontent.com/yogayyy/Scripts/master/Icon/shylocks/jd_festival2.jpg, enabled=true
 
 ================Loon==============
 [Script]
-cron "15 0 * * *" script-path=https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_festival.js, tag=京东手机年终奖
+cron "15 0 * * *" script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_festival.js, tag=京东手机年终奖
 
 ===============Surge=================
-京东手机年终奖 = type=cron,cronexp="15 0 * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_festival.js
+京东手机年终奖 = type=cron,cronexp="15 0 * * *",wake-system=1,timeout=3600,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_festival.js
 
 ============小火箭=========
-京东手机年终奖 = type=cron,script-path=https://raw.githubusercontent.com/LXK9301/jd_scripts/master/jd_festival.js, cronexpr="15 0 * * *", timeout=3600, enable=true
+京东手机年终奖 = type=cron,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_festival.js, cronexpr="15 0 * * *", timeout=3600, enable=true
  */
 const $ = new Env('京东手机年终奖');
 
-const notify = $.isNode() ? require('./sendNotify') : '';
+const notify = $.isNode() ? require('../sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
-const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
+const jdCookieNode = $.isNode() ? require('../jdCookie.js') : '';
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message;
 const randomCount = $.isNode() ? 20 : 5;
@@ -73,8 +73,6 @@ const JD_API_HOST = 'https://shopping-festival.m.jd.com/sf/';
 
         if ($.isNode()) {
           await notify.sendNotify(`${$.name}cookie已失效 - ${$.UserName}`, `京东账号${$.index} ${$.UserName}\n请重新登录获取cookie`);
-        } else {
-          $.setdata('', `CookieJD${i ? i + 1 : ""}`);//cookie失效，故清空cookie。$.setdata('', `CookieJD${i ? i + 1 : "" }`);//cookie失效，故清空cookie。
         }
         continue
       }
@@ -512,7 +510,7 @@ function taskPostUrl(function_id, body = {}) {
       'pragma': 'no-cache',
       'sign': sign(n, `d55b480bed0545839dbd8b78b6cffdb1${t}`, `/sf/${function_id}`),
       'timestamp': ($.isQuanX()||$.isSurge()) ?t.toString():t,
-      "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/87.0.4280.141"
+      "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('../USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/87.0.4280.141"
     )
     }
   }
